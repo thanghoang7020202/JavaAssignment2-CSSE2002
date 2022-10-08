@@ -15,17 +15,17 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
     /**
      * The size of the pizza base as defined by Bases
      */
-    BaseSize size;
+    Bases.BaseSize size;
 
     /**
      * The sauce on the pizza as defined by Sauces
      */
-    Sauce sauce;
+    Sauces.Sauce sauce;
 
     /**
      * The cheese on the pizza as defined by Cheeses
      */
-    Cheese cheese;
+    Cheeses.Cheese cheese;
 
     /**
      * The list of toppings on the Pizza, List of Toppings
@@ -43,9 +43,9 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      * @throws TooManyToppingsException when attempting to add toppings to Pizza or any class extending Pizza
      */
     public Pizza() throws TooManyToppingsException {
-        this.cheese = Cheese.MOZZARELLA;
-        this.sauce = Sauce.TOMATO;
-        this.size = BaseSize.MEDIUM;
+        this.cheese = Cheeses.Cheese.MOZZARELLA;
+        this.sauce = Sauces.Sauce.TOMATO;
+        this.size = Bases.BaseSize.MEDIUM;
         this.name = "Dr Java's Pizza";
     }
 
@@ -57,7 +57,7 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      * @param cheese The cheese on the pizza as defined by Cheeses
      * @throws TooManyToppingsException when attempting to add toppings to Pizza or any class extending Pizza
      */
-    public Pizza(BaseSize size, Sauce sauce, Cheese cheese)
+    public Pizza(Bases.BaseSize size, Sauces.Sauce sauce, Cheeses.Cheese cheese)
             throws TooManyToppingsException {
         this.size = size;
         this.sauce = sauce;
@@ -74,9 +74,9 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      * @throws TooManyToppingsException if toppings.size() > 5
      *  when attempting to add toppings to Pizza or any class extending Pizza
      */
-    public Pizza(BaseSize size,
-                 Sauce sauce,
-                 Cheese cheese,
+    public Pizza(Bases.BaseSize size,
+                 Sauces.Sauce sauce,
+                 Cheeses.Cheese cheese,
                  List<Topping> toppings)
             throws TooManyToppingsException {
         if (toppings.size() > 5) {
@@ -119,7 +119,7 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      * Set the size of this pizza base.
      * @param size the size of this pizza base.
      */
-    public void set(BaseSize size) {
+    public void set(Bases.BaseSize size) {
         this.size = size;
     }
 
@@ -127,7 +127,7 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      * Set the cheese on this pizza.
      * @param cheese the cheese on this pizza
      */
-    public void set(Cheese cheese) {
+    public void set(Cheeses.Cheese cheese) {
         this.cheese = cheese;
     }
 

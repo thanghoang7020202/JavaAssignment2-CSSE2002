@@ -69,7 +69,7 @@ public class Menu {
      */
     public MenuItem get(int index)
             throws IndexOutOfBoundsException {
-        MenuItem output = new MenuItem();
+        MenuItem output = null;
         return output;
     }
 

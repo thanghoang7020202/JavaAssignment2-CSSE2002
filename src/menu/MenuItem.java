@@ -1,4 +1,4 @@
 package menu;
 
-public class MenuItem {
+public interface MenuItem {
 }
