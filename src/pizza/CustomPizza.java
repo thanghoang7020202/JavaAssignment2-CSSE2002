@@ -46,7 +46,11 @@ public class CustomPizza extends Pizza implements MenuItem {
      */
     public void add(List<Topping> toppings)
             throws TooManyToppingsException {
-
+        if (super.accessToppings().size() + toppings.size() > 5) {
+           throw new TooManyToppingsException("The number of topping is "
+                   + toppings.size() + " > 5");
+        }
+        super.accessToppings().addAll(toppings);
     }
 
     /**
@@ -58,7 +62,11 @@ public class CustomPizza extends Pizza implements MenuItem {
      */
     public void add(Topping topping)
             throws TooManyToppingsException {
-
+        if (super.accessToppings().size() + toppings.size() > 5) {
+            throw new TooManyToppingsException("The number of topping is "
+                    + toppings.size() + " > 5");
+        }
+        super.accessToppings().add(topping);
     }
 
     /**
@@ -67,7 +75,7 @@ public class CustomPizza extends Pizza implements MenuItem {
      * @param topping topping to be removed from the pizza
      */
     public void remove(Topping topping) {
-
+        super.accessToppings().remove(topping);
     }
 
 }
