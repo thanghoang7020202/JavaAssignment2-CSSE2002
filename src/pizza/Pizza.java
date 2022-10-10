@@ -15,27 +15,27 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
     /**
      * The size of the pizza base as defined by Bases
      */
-    Bases.BaseSize size;
+    private Bases.BaseSize size;
 
     /**
      * The sauce on the pizza as defined by Sauces
      */
-    Sauces.Sauce sauce;
+    private Sauces.Sauce sauce;
 
     /**
      * The cheese on the pizza as defined by Cheeses
      */
-    Cheeses.Cheese cheese;
+    private Cheeses.Cheese cheese;
 
     /**
      * The list of toppings on the Pizza, List of Toppings
      */
-    List<Topping> toppings;
+    private List<Topping> toppings;
 
     /**
      * The name of the pizza
      */
-    String name;
+    private String name;
     /**
      * Default constructor which creates a medium cheese pizza with tomato sauce.
      * A cheese pizza has a tomato sauce base, mozzarella cheese and no additional toppings.
