@@ -4,13 +4,15 @@ import exceptions.TooManyToppingsException;
 
 public class CustomerOrder {
 
+
     /**
      * Default Constructor to create a pizza Since no name supplied,
      * this constructor sends GUI prompt to the customer for their name through by calling requestName().
      * and passes on the name to the String signature constructor.
      */
     public CustomerOrder() {
-
+        Order order = new Order();
+        order.setName(this.requestName());
     }
 
     /**
@@ -19,6 +21,8 @@ public class CustomerOrder {
      * gets the current date and time, and calls createOrder().
      */
     public CustomerOrder(String customerName) {
+        Order order = new Order();
+        order.setName(customerName);
 
     }
 

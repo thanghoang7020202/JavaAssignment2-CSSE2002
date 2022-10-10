@@ -62,9 +62,9 @@ public class CustomPizza extends Pizza implements MenuItem {
      */
     public void add(Topping topping)
             throws TooManyToppingsException {
-        if (super.accessToppings().size() + toppings.size() > 5) {
+        if (super.accessToppings().size() + 1 > 5) {
             throw new TooManyToppingsException("The number of topping is "
-                    + toppings.size() + " > 5");
+                    + super.accessToppings().size() + 1 + " > 5");
         }
         super.accessToppings().add(topping);
     }

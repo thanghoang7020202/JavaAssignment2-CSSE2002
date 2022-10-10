@@ -4,7 +4,7 @@ package exceptions;
  * Exception thrown when too many toppings
  * are attempted to be added to a pizza
  */
-public class TooManyToppingsException extends Throwable {
+public class TooManyToppingsException extends Exception {
 
     /**
      * Constructs a TooManyToppingsException that contains
@@ -14,7 +14,7 @@ public class TooManyToppingsException extends Throwable {
      */
     public TooManyToppingsException(String message,
                                     int lineNum) {
-        System.out.println(message + ", " + lineNum);
+        super(message + ", " + lineNum);
     }
 
     /**
@@ -23,7 +23,7 @@ public class TooManyToppingsException extends Throwable {
      * @param message
      */
     public TooManyToppingsException(String message) {
-        System.out.println(message);
+        super(message);
     }
 
     /**
@@ -32,7 +32,7 @@ public class TooManyToppingsException extends Throwable {
      * @param cause
      */
     public TooManyToppingsException(Throwable cause) {
-        System.out.println(cause);
+        super(cause);
     }
 
     /**
@@ -44,6 +44,6 @@ public class TooManyToppingsException extends Throwable {
      */
     public TooManyToppingsException(String message,
                                     Throwable cause) {
-        System.out.println(message + ", " + cause);
+        super(message + ", " + cause);
     }
 }

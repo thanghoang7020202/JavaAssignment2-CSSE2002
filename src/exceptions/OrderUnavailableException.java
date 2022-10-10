@@ -4,13 +4,13 @@ package exceptions;
 /**
  * Exception thrown if an order request is not able to be completed.
  */
-public class OrderUnavailableException {
+public class OrderUnavailableException extends Exception {
 
     /**
      * Constructs a OrderUnavailableException with no detail message.
      */
     public OrderUnavailableException() {
-
+        super();
     }
 
     /**
@@ -18,7 +18,7 @@ public class OrderUnavailableException {
      * a helpful detail message explaining why the exception occurred.
      */
     public OrderUnavailableException(String message) {
-        System.out.println(message);
+        super(message);
     }
 
 }

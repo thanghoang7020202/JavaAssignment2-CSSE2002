@@ -1,9 +1,12 @@
 package io;
 
 import exceptions.PizzaFormatException;
+import exceptions.TooManyToppingsException;
 import menu.Menu;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 /**
@@ -35,9 +38,22 @@ public class MenuLoader {
      * @return
      */
     public static Menu load(String filename){
-        BufferedReader file;
-        Menu a = new Menu();
-        return a;
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(filename));
+            getMenu(reader);
+        }
+        catch (FileNotFoundException e){
+            System.exit(1);
+        }
+        catch (PizzaFormatException e2){
+            System.exit(2);
+        }
+        /*catch (TooManyToppingsException e3){
+            System.exit(4);
+        }*/
+
+        return Menu.getInstance();
     }
 
     /**
@@ -95,8 +111,7 @@ public class MenuLoader {
      */
     public static Menu getMenu(BufferedReader reader)
             throws PizzaFormatException {
-        Menu a = new Menu();
-        return a;
+        return Menu.getInstance();
     }
 
     public static void displayFileContent(String filename) {

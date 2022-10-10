@@ -3,6 +3,13 @@ package menu;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Singleton class which defines a menu that contains items that can be ordered from.
+ * All classes that implement MenuItem must be registered with this Menu,
+ * which will allow them to be ordered in the simulation.
+ *
+ * A Menu starts as empty but will grow over the programs run time.
+ */
 public class Menu {
 
     /**
@@ -41,12 +48,21 @@ public class Menu {
     static final int VEGETARIAN = 1;
 
     /**
+     * List of items inside the menu
+     */
+    private List<Menu> Items;
+
+    private static Menu menu;
+    private Menu() {
+        Items = new ArrayList<>();
+    }
+    /**
      * Returns the singleton instance of the menu.
-     * @return
+     * @return singleton instance
      */
     public static Menu getInstance() {
-        Menu output = new Menu();
-        return output;
+        if(menu == null) menu = new Menu();
+        return menu;
     }
 
     /**

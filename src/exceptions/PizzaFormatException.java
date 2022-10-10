@@ -4,7 +4,7 @@ package exceptions;
  * Exception thrown when an error is thrown
  * while parsing the text file using MenuLoader.
  */
-public class PizzaFormatException extends Throwable {
+public class PizzaFormatException extends Exception {
 
     /**
      * Constructs a PizzaFormatException that contains
@@ -15,7 +15,7 @@ public class PizzaFormatException extends Throwable {
     public PizzaFormatException(String message,
                                 int lineNum) {
         //not sure about the format --> need to be fixed later
-        System.out.println(message + " = " + lineNum);
+        super(message + " = " + lineNum);
     }
 
     /**
@@ -28,7 +28,7 @@ public class PizzaFormatException extends Throwable {
     public PizzaFormatException(String message,
                                 int lineNum,
                                 Throwable cause) {
-        System.out.println(message + ", " + lineNum + ", " + cause);
+        super(message + ", " + lineNum + ", " + cause);
     }
 
     /**
@@ -43,6 +43,6 @@ public class PizzaFormatException extends Throwable {
     public PizzaFormatException(String message,
                                 int lineNum,
                                 int debugCode) {
-        System.out.println(message + ", " + lineNum + ", " + debugCode);
+        super(message + ", " + lineNum + ", " + debugCode);
     }
 }
