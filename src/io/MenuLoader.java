@@ -111,8 +111,11 @@ public class MenuLoader {
      */
     public static Menu getMenu(BufferedReader reader)
             throws PizzaFormatException {
+        if(reader.equals(null)) throw new PizzaFormatException("The reader is null",1);
+        // adding more here
         return Menu.getInstance();
     }
+
 
     public static void displayFileContent(String filename) {
         Scanner output = new Scanner(filename);

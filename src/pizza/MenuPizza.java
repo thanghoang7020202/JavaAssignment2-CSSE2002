@@ -50,7 +50,7 @@ public class MenuPizza extends Pizza implements MenuItem {
     public String toString() {
         String output = "[MenuPizza] "
                 + super.toString() + "["
-                + super.accessToppings().size();
+                + super.accessToppings().size() + "]";
         return output;
     }
 }

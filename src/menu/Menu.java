@@ -50,7 +50,7 @@ public class Menu {
     /**
      * List of items inside the menu
      */
-    private List<Menu> Items;
+    private List<MenuItem> Items;
 
     private static Menu menu;
     private Menu() {
