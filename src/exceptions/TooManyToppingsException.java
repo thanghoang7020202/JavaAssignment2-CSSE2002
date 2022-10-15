@@ -14,13 +14,13 @@ public class TooManyToppingsException extends Exception {
      */
     public TooManyToppingsException(String message,
                                     int lineNum) {
-        super(message + ", " + lineNum);
+        super(message + " at " + lineNum);
     }
 
     /**
      * Constructs a TooManyToppingsException that contains
      * a helpful detail message explaining why the exception occurred.
-     * @param message
+     * @param message detail message
      */
     public TooManyToppingsException(String message) {
         super(message);
@@ -32,7 +32,8 @@ public class TooManyToppingsException extends Exception {
      * @param cause
      */
     public TooManyToppingsException(Throwable cause) {
-        super(cause);
+        super();
+        System.out.println(cause);
     }
 
     /**
@@ -44,6 +45,7 @@ public class TooManyToppingsException extends Exception {
      */
     public TooManyToppingsException(String message,
                                     Throwable cause) {
-        super(message + ", " + cause);
+        super(message);
+        System.out.println(cause);
     }
 }

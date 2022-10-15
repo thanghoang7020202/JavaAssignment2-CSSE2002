@@ -19,8 +19,9 @@ import java.util.Scanner;
  */
 public class MenuLoader {
 
+    static final String PATH = "./src/assets/";
     /**
-     * Constructor for Menuloader class
+     * Inherited default constructor, not used in this class
      */
     public MenuLoader() {
     }
@@ -111,16 +112,10 @@ public class MenuLoader {
      */
     public static Menu getMenu(BufferedReader reader)
             throws PizzaFormatException {
-        if(reader.equals(null)) throw new PizzaFormatException("The reader is null",1);
+        if(reader.equals(null)) System.exit(1);
         // adding more here
+
         return Menu.getInstance();
     }
 
-
-    public static void displayFileContent(String filename) {
-        Scanner output = new Scanner(filename);
-        while (output.hasNext()){
-            System.out.print(output.next());
-        }
-    }
 }

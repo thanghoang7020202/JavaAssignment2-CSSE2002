@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class CustomPizza extends Pizza implements MenuItem {
 
+
     /**
      * Default constructor which creates a medium cheese pizza.
      * A medium cheese pizza has a tomato sauce base, mozzarella cheese and no additional toppings.
@@ -78,4 +79,13 @@ public class CustomPizza extends Pizza implements MenuItem {
         super.accessToppings().remove(topping);
     }
 
+    @Override
+    public double getTotalPrice() {
+        return 0;
+    }
+
+    @Override
+    public void registerMenuItem() {
+        MenuItem.super.registerMenuItem();
+    }
 }

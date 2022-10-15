@@ -1,6 +1,10 @@
 package pizza.ingredients;
 
 public class Cheeses {
+
+    /**
+     * enum containing the cheeses available for the pizza cheese type
+     */
     public enum Cheese {
 
         /**

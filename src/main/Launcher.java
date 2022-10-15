@@ -1,3 +1,7 @@
+package main;
+
+import menu.CustomerOrder;
+
 /**
  * The entry point for launching the application.
  * The application is a simulation of a Pizza Shop.
@@ -6,9 +10,15 @@
  */
 public class Launcher {
     public Launcher() {
+    }
 
-    };
+    /**
+     * A place you can use to call the CustomerOrder class.
+     * A simple entry point initiating and launching anonymously
+     * @param args provides no usable function
+     */
     public static void main(String[] args) {
         System.out.println("Hello world!");
+        CustomerOrder order = new CustomerOrder();
     }
 }

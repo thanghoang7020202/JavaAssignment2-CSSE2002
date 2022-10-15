@@ -1,4 +1,4 @@
 PizzaMenu 2
-     *
-     *          Flaming Hot [chillies, jalapenos, habanero, carolina reapers, red onions]
-     *          Meat Feast [bacon, pepperoni, sausage, beef, chicken]
+
+Flaming Hot [chillies, jalapenos, habanero, carolina reapers, red onions]
+Meat Feast [bacon, pepperoni, sausage, beef, chicken]

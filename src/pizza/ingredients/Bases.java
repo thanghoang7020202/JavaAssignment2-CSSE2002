@@ -1,6 +1,7 @@
 package pizza.ingredients;
 
 public class Bases {
+
     /**
      * enum containing the sizes available for the pizza Bases type
      */
