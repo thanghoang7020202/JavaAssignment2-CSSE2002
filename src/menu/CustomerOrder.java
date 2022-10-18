@@ -2,6 +2,8 @@ package menu;
 
 import exceptions.TooManyToppingsException;
 
+import javax.swing.*;
+
 public class CustomerOrder {
 
 
@@ -33,6 +35,7 @@ public class CustomerOrder {
      */
     protected String requestName() {
         String a = new String();
+        JOptionPane.showInputDialog("",a);
         return a;
     }
 

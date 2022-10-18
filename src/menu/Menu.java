@@ -56,6 +56,7 @@ public class Menu {
     private Menu() {
         Items = new ArrayList<>();
     }
+
     /**
      * Returns the singleton instance of the menu.
      * @return singleton instance
@@ -74,7 +75,16 @@ public class Menu {
      * @param item a menu item to be registered to the menu
      */
     public void registerMenuItem(MenuItem item) {
-
+        boolean flag = false;
+        for (MenuItem i : Items) {
+            if( i.equals(item)) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            this.Items.add(item);
+        }
     }
 
     /**

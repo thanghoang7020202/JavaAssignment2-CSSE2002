@@ -13,7 +13,7 @@ import java.util.List;
  * MenuPizza provides a selection for ordering pre-organised Pizzas from the menu.
  * The menu pizza's toppings can not be changed.
  */
-public class MenuPizza extends Pizza implements MenuItem {
+public class MenuPizza extends Pizza {
 
     /**
      * Creating a Menu Pizza with a set base size, sauce, cheese and list of toppings.

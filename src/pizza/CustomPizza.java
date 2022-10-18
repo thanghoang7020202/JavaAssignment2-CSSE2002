@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Custom Pizza allows the addition of extra toppings for a more delicious Pizza.
  * Unless you're a margarita fan :)
+ * The custom pizza can have multiple same toppings added to it.
  */
 public class CustomPizza extends Pizza implements MenuItem {
 
@@ -23,15 +24,22 @@ public class CustomPizza extends Pizza implements MenuItem {
      * This pizza should be called "Custom Pizza" until another name is set.
      * @throws TooManyToppingsException when attempting to add toppings to Pizza or any class extending Pizza
      */
-    public CustomPizza() throws TooManyToppingsException {
+    public CustomPizza() {
         super();
         super.setName("Custom Pizza");
     }
 
+    /**
+     * Creating the default requirements of a pizza with no additional toppings.
+     * This pizza should be called "Custom Pizza" until another name is set.
+     * @param size The size of the pizza base as defined by Bases
+     * @param sauce The sauce on the pizza as defined by Sauces
+     * @param cheese The cheese on the pizza as defined by Cheeses
+     * @throws TooManyToppingsException
+     */
     public CustomPizza(Bases.BaseSize size,
                        Sauces.Sauce sauce,
-                       Cheeses.Cheese cheese)
-            throws TooManyToppingsException {
+                       Cheeses.Cheese cheese) {
         super(size,sauce,cheese);
         super.setName("Custom Pizza");
     }

@@ -10,7 +10,7 @@ import java.util.List;
  * This is the Pizza template to be extended for more rewarding pizza toppings
  */
 public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
-    static final int MAX_TOPPINGS = 5;
+    public static final int MAX_TOPPINGS = 5;
 
     /**
      * The size of the pizza base as defined by Bases
@@ -36,13 +36,14 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      * The name of the pizza
      */
     private String name;
+
     /**
      * Default constructor which creates a medium cheese pizza with tomato sauce.
      * A cheese pizza has a tomato sauce base, mozzarella cheese and no additional toppings.
      * This pizza should be called "Dr Java's Pizza" unless/until another name is set.
      * @throws TooManyToppingsException when attempting to add toppings to Pizza or any class extending Pizza
      */
-    public Pizza() throws TooManyToppingsException {
+    public Pizza() {
         this.cheese = Cheeses.Cheese.MOZZARELLA;
         this.sauce = Sauces.Sauce.TOMATO;
         this.size = Bases.BaseSize.MEDIUM;
@@ -57,8 +58,7 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      * @param cheese The cheese on the pizza as defined by Cheeses
      * @throws TooManyToppingsException when attempting to add toppings to Pizza or any class extending Pizza
      */
-    public Pizza(Bases.BaseSize size, Sauces.Sauce sauce, Cheeses.Cheese cheese)
-            throws TooManyToppingsException {
+    public Pizza(Bases.BaseSize size, Sauces.Sauce sauce, Cheeses.Cheese cheese) {
         this.size = size;
         this.sauce = sauce;
         this.cheese = cheese;
@@ -105,6 +105,17 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Returns the price of the pizza base size,
+     * defined in the BaseSize enum, and adds the price of each topping on the pizza.
+     * @return the price of the pizza.
+     */
+    public double getTotalPrice() {
+        Double total = 0.0;
+        if(this.toppings.isEmpty()) return this.size.getPrice();
+        else return this.size.getPrice() + this.toppings.size() * 2;
     }
 
     /**

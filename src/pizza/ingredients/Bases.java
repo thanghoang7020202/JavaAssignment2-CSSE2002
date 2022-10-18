@@ -20,7 +20,15 @@ public class Bases {
         /**
          * SMALL diameter of 6 inches
          */
-        SMALL
+        SMALL;
+
+        public double getPrice() {
+            switch (this) {
+                case LARGE -> { return 7;}
+                case MEDIUM -> { return 5;}
+                default -> { return 3;}
+            }
+        }
 
 
     }
