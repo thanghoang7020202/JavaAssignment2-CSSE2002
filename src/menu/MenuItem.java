@@ -5,7 +5,6 @@ package menu;
  */
 public interface MenuItem {
 
-
     /**
      * Returns the price of a menu item.
      * @return the price of the menu item

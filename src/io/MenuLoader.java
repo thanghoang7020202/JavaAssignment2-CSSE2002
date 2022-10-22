@@ -35,7 +35,7 @@ public class MenuLoader {
      * If the load method catches a FileNotFoundException, PizzaFormatException,
      * or a TooManyToppingsException the application should exit with the vales 1, 2,
      * and 4 respectively.
-     * @param filename
+     * @param filename name of file to be read
      * @return
      */
     public static Menu load(String filename){

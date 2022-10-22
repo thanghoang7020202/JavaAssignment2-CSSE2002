@@ -25,10 +25,17 @@ public class Topping {
     private String name;
     private boolean isVegan;
 
-
+    /**
+     * private constructor of Topping class
+     * This method help to add new topping into the list
+     * @param name name of the topping
+     * @param isVegan if the topping is vegan or not
+     */
     private Topping(String name, boolean isVegan) {
-
+        Topping topping = new Topping(name.toUpperCase(),isVegan);
+        toppings.add(topping);
     }
+
     /**
      * Creates a new topping with the specified name and vegan boolean state.
      * This new topping is not returned but rather should be accessed by valueOf(String)
@@ -81,6 +88,15 @@ public class Topping {
     public String toString() {
         return this.name;
     }
+
+    /**
+     * Returns the vegan boolean property value
+     * The isSpicy boolean property value was flat out abandoned
+     * because there were fierce arguments about what constitutes a spicy topping.
+     * Dr Java considered sweetcorn to be spicy, but his team disagreed.
+     * The debate was so fierce that Dr Java was forced to concede and abandon the isSpicy property.
+     * @return
+     */
     public boolean isVegan() {
         return this.isVegan;
     }

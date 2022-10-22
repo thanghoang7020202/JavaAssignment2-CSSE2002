@@ -49,8 +49,7 @@ public class MenuPizza extends Pizza {
     @Override
     public String toString() {
         String output = "[MenuPizza] "
-                + super.toString() + "["
-                + super.accessToppings().size() + "]";
+                + super.toString();
         return output;
     }
 }

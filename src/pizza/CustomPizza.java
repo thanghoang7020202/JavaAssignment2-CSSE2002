@@ -16,11 +16,9 @@ import java.util.List;
  */
 public class CustomPizza extends Pizza implements MenuItem {
 
-
     /**
      * Default constructor which creates a medium cheese pizza.
      * A medium cheese pizza has a tomato sauce base, mozzarella cheese and no additional toppings.
-     *
      * This pizza should be called "Custom Pizza" until another name is set.
      * @throws TooManyToppingsException when attempting to add toppings to Pizza or any class extending Pizza
      */
@@ -85,15 +83,5 @@ public class CustomPizza extends Pizza implements MenuItem {
      */
     public void remove(Topping topping) {
         super.accessToppings().remove(topping);
-    }
-
-    @Override
-    public double getTotalPrice() {
-        return 0;
-    }
-
-    @Override
-    public void registerMenuItem() {
-        MenuItem.super.registerMenuItem();
     }
 }

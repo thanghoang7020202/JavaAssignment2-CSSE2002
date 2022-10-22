@@ -3,13 +3,18 @@ package pizza;
 import exceptions.TooManyToppingsException;
 import pizza.ingredients.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Pizza combines the required basic elements of a pizza, being the base, sauce and cheese, and 5 additional toppings.
  * This is the Pizza template to be extended for more rewarding pizza toppings
  */
-public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
+public abstract class Pizza implements Bases, Sauces, Cheeses {
+
+    /**
+     * The maximum number of toppings that can be placed on a pizza. (5)
+     */
     public static final int MAX_TOPPINGS = 5;
 
     /**
@@ -96,15 +101,8 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      * @return the list of toppings on this pizza.
      */
     public List<Topping> getToppings() {
-        return this.toppings;
-    }
-
-    /**
-     * Returns the name of this pizza.
-     * @return a String name of this pizza
-     */
-    public String getName() {
-        return this.name;
+        List<Topping> output = new ArrayList<Topping>(this.toppings);
+        return output;
     }
 
     /**
@@ -116,6 +114,15 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
         Double total = 0.0;
         if(this.toppings.isEmpty()) return this.size.getPrice();
         else return this.size.getPrice() + this.toppings.size() * 2;
+    }
+
+
+    /**
+     * Returns the name of this pizza.
+     * @return a String name of this pizza
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -132,6 +139,14 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
      */
     public void set(Bases.BaseSize size) {
         this.size = size;
+    }
+
+    /**
+     * Set the sauce on this pizza.
+     * @param sauce the sauce on this pizza
+     */
+    public void set(Sauces.Sauce sauce) {
+        this.sauce = sauce;
     }
 
     /**
@@ -175,6 +190,7 @@ public abstract class Pizza /*implements Bases, Sauces, Cheeses */{
         if(!this.toppings.isEmpty()) {
             output += "- Toppings: " + this.toppings;
         }
+        output += " $" + this.getTotalPrice();
         return output;
     }
 

@@ -1,5 +1,6 @@
 package main;
 
+import gui.Display;
 import menu.CustomerOrder;
 
 /**
@@ -18,7 +19,9 @@ public class Launcher {
      * @param args provides no usable function
      */
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        CustomerOrder order = new CustomerOrder();
+        //System.out.println("Hello world!");
+        new Display();
+
+        //CustomerOrder order = new CustomerOrder();
     }
 }

@@ -1,6 +1,16 @@
 package pizza.ingredients;
 
-public class Bases {
+/**
+ * Base interface for managing the types of base sizes available
+ */
+public interface Bases {
+
+    /**
+     * Set (Bases) utilises an enum with all the types of Bases available for the Bases Type.
+     * BaseSize being (SMALL, MEDIUM, LARGE)
+     * @param size enum Type depicting the sizes of each Pizza base type
+     */
+    void set(Bases.BaseSize size);
 
     /**
      * enum containing the sizes available for the pizza Bases type
@@ -22,6 +32,10 @@ public class Bases {
          */
         SMALL;
 
+        /**
+         * Returns the price of this base
+         * @return the price of the base
+         */
         public double getPrice() {
             switch (this) {
                 case LARGE -> { return 7;}
