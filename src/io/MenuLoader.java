@@ -7,7 +7,10 @@ import menu.Menu;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Class to provide management for the loading, saving
@@ -113,8 +116,31 @@ public class MenuLoader {
     public static Menu getMenu(BufferedReader reader)
             throws PizzaFormatException {
         if(reader.equals(null)) System.exit(1);
-        // adding more here
+        String content = "";
+        Scanner string = new Scanner(reader.toString());
+        Pattern pattern = Pattern.compile("Pizza [0-9]", Pattern.CASE_INSENSITIVE);
 
+        content = string.nextLine();
+        Matcher matcher = pattern.matcher(content);
+        Boolean found = matcher.find();
+        if(string.hasNext() == false || !found) {
+            throw new PizzaFormatException("file have no line!",118);
+        }
+
+        // Take second parameter of content split by blank space (the number of Pizza)
+        int numOfPizza = Integer.parseInt(Arrays.stream(content.split(" ")).toArray()[1].toString());
+        content = string.nextLine();
+        if(content != "") {
+            throw new PizzaFormatException("second line is not empty string",132);
+        }
+        for (int i = 0 ; i < numOfPizza; i++) {
+            if(string.hasNext()) {
+                content = string.nextLine();
+                // iterate though each pizza
+            } else {
+                throw new PizzaFormatException("missing pizza!",135);
+            }
+        }
         return Menu.getInstance();
     }
 
