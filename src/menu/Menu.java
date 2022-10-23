@@ -101,7 +101,7 @@ public class Menu {
 
     /**
      * Returns the items that have been registered with the Menu.
-     * Adding or removing elements from the returned list should NOTaffect the original list.
+     * Adding or removing elements from the returned list should NOT affect the original list.
      * @return the items on the menu.
      */
     public List<MenuItem> getItems() {

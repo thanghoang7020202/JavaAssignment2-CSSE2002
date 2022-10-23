@@ -3,6 +3,7 @@ package io;
 import exceptions.PizzaFormatException;
 import exceptions.TooManyToppingsException;
 import menu.Menu;
+import menu.MenuItem;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -138,10 +139,22 @@ public class MenuLoader {
                 content = string.nextLine();
                 // iterate though each pizza
             } else {
-                throw new PizzaFormatException("missing pizza!",135);
+                throw new PizzaFormatException("missing pizza!",136);
             }
         }
         return Menu.getInstance();
     }
+    private void helper(String content) throws PizzaFormatException {
+        String[] words = content.split(" \\p{Punct}");
+        //Arrays.stream(words).peek(System.out::print);
+        words[1]= words[1].substring(0,words[1].length() -1);
 
+        if (words.length < 2) {
+            throw new PizzaFormatException("incorrect pizza declaration",2);
+            //System.out.println("word < 2");
+        }
+        String name = words[0];
+        String[] ingedients = words[1].split(", ");
+
+    }
 }
