@@ -32,8 +32,8 @@ public class Topping {
      * @param isVegan if the topping is vegan or not
      */
     private Topping(String name, boolean isVegan) {
-        Topping topping = new Topping(name.toUpperCase(),isVegan);
-        toppings.add(topping);
+        this.name = name.toUpperCase();
+        this.isVegan = isVegan;
     }
 
     /**
@@ -73,7 +73,7 @@ public class Topping {
      */
     public static Topping[] values() {
         ;
-        Topping[] output = {};
+        Topping[] output = new Topping[toppings.size()];
         for(int i = 0; i < toppings.size(); i ++) {
             output[i] = toppings.get(i);
         }

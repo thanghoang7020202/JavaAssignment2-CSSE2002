@@ -1,8 +1,6 @@
 package pizza;
 
 import exceptions.TooManyToppingsException;
-import menu.MenuItem;
-import pizza.ingredients.Bases;
 import pizza.ingredients.Cheeses;
 import pizza.ingredients.Sauces;
 import pizza.ingredients.Topping;
@@ -24,7 +22,7 @@ public class MenuPizza extends Pizza {
      * @throws TooManyToppingsException if toppings.size() > 5
      * OR when attempting to add toppings to Pizza or any class extending Pizza
      */
-    public MenuPizza(Bases.BaseSize size,
+    public MenuPizza(BaseSize size,
                      Sauces.Sauce sauce,
                      Cheeses.Cheese cheese,
                      List<Topping> toppings)
@@ -35,15 +33,11 @@ public class MenuPizza extends Pizza {
     /**
      * Returns the human-readable string representation of this Menu Pizza.
      * The format of the string to return is:
-     *
-     *      [MenuPizza] $Pizza [$NumToppings]
-     *
+     *      [MenuPizza] `Pizza`
      * Where:
-     * $Pizza toString of the Pizza superclass
-     * $NumToppings is the number of toppings on the pizza
+     * `Pizza` toString of the Pizza superclass
      * For example:
-     *     [MenuPizza] Hawaiian: is a 'MEDIUM' sized base with 'TOMATO'
-     *     sauce and 'MOZZARELLA' cheese - Toppings: [PINEAPPLE, HAM] [2]
+     *     [MenuPizza] Hawaiian: is a 'MEDIUM' sized base with 'TOMATO' sauce and 'MOZZARELLA' cheese - Toppings: [PINEAPPLE, HAM] $9.00
      * @return string representation of this Menu Pizza
      */
     @Override

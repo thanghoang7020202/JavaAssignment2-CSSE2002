@@ -1413,9 +1413,37 @@ public class Display extends javax.swing.JPanel {
         //  gets the selected menUItem from the list of Menu Items in the menu
         MenuItem mu = menu.getItems().stream().filter((menu.MenuItem t)
                 -> t.getName().equals(selected)).findFirst().get();
-
+        Bases.BaseSize size = Bases.BaseSize.MEDIUM;
+        if (selectMediumRadioButton.isSelected()) {
+            size = Bases.BaseSize.MEDIUM;
+        } else if (selectSmallRadioButton.isSelected()) {
+            size = Bases.BaseSize.SMALL;
+        } else if (selectLargeRadioButton.isSelected()) {
+            size = Bases.BaseSize.LARGE;
+        }
+        Cheeses.Cheese cheese = Cheeses.Cheese.MOZZARELLA;
+        if (selectMozzerallaRadioButton.isSelected()) {
+            cheese = Cheeses.Cheese.MOZZARELLA;
+        } else if (selectVeganRadioButton.isSelected()) {
+            cheese = Cheeses.Cheese.VEGAN;
+        } else if (selectNoneCheeseRadioButton.isSelected()) {
+            cheese = Cheeses.Cheese.NONE;
+        }
+        Sauces.Sauce sauce = Sauces.Sauce.TOMATO;
+        if (selectTomatoRadioButton.isSelected()) {
+            sauce = Sauces.Sauce.TOMATO;
+        } else if (selectBBQRadioButton.isSelected()) {
+            sauce = Sauces.Sauce.BBQ;
+        } else if (selectGarlicRadioButton.isSelected()) {
+            sauce = Sauces.Sauce.GARLIC;
+        } else if (selectNoneSauceRadioButton.isSelected()) {
+            sauce = Sauces.Sauce.NONE;
+        }
         // add mu to order
         Pizza pizza = (Pizza) mu;
+        pizza.set(size);
+        pizza.set(sauce);
+        pizza.set(cheese);
         order.add(pizza);
         updateCurrentOrder(pizza.toString()+"\n");
     }

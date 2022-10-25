@@ -1,7 +1,11 @@
 package pizza;
 
 import exceptions.TooManyToppingsException;
-import pizza.ingredients.*;
+import pizza.ingredients.Bases;
+import pizza.ingredients.Cheeses;
+import pizza.ingredients.Sauces;
+import pizza.ingredients.Topping;
+import menu.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +14,7 @@ import java.util.List;
  * Pizza combines the required basic elements of a pizza, being the base, sauce and cheese, and 5 additional toppings.
  * This is the Pizza template to be extended for more rewarding pizza toppings
  */
-public abstract class Pizza implements Bases, Sauces, Cheeses {
+public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
 
     /**
      * The maximum number of toppings that can be placed on a pizza. (5)
@@ -53,6 +57,7 @@ public abstract class Pizza implements Bases, Sauces, Cheeses {
         this.sauce = Sauces.Sauce.TOMATO;
         this.size = Bases.BaseSize.MEDIUM;
         this.name = "Dr Java's Pizza";
+        this.toppings = new ArrayList<>();
     }
 
     /**
@@ -68,6 +73,7 @@ public abstract class Pizza implements Bases, Sauces, Cheeses {
         this.sauce = sauce;
         this.cheese = cheese;
         this.name = "Dr Java's Pizza";
+        this.toppings = new ArrayList<>();
     }
 
     /**

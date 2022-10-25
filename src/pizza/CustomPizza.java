@@ -1,8 +1,8 @@
 package pizza;
 
 import exceptions.TooManyToppingsException;
-import menu.MenuItem;
 import pizza.ingredients.Bases;
+import menu.MenuItem;
 import pizza.ingredients.Cheeses;
 import pizza.ingredients.Sauces;
 import pizza.ingredients.Topping;
