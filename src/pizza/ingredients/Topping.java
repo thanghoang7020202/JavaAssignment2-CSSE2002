@@ -21,8 +21,20 @@ public class Topping {
      * The price of the topping is 2.0.
      */
     public static final double PRICE = 2.0;
+
+    /**
+     * The list of topping to be chosen from
+     */
     private static List<Topping> toppings = new ArrayList<>();
+
+    /**
+     * name of a topping
+     */
     private String name;
+
+    /**
+     * Topping for vegan or not
+     */
     private boolean isVegan;
 
     /**
@@ -72,7 +84,6 @@ public class Topping {
      * in the order they are declared.
      */
     public static Topping[] values() {
-        ;
         Topping[] output = new Topping[toppings.size()];
         for(int i = 0; i < toppings.size(); i ++) {
             output[i] = toppings.get(i);

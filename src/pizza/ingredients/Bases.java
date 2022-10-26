@@ -43,7 +43,5 @@ public interface Bases {
                 default -> { return 3;}
             }
         }
-
-
     }
 }

@@ -44,15 +44,28 @@ public class MenuLoader {
 
     /**
      * Creates a BufferedReader, utilizing a FileReader to be parsed by the getMenu method.
-     * The file to be loaded is stored within a package
-     * called assets under the file called PizzaMenu.txt.
-     * This is the supplied file name, as other filenames can be used depending
-     * on the 'menu-specials' that can be promoted from time to time.
+     * The file to be loaded is stored within a package called assets under the filename PizzaMenu.txt.
+     * This is the supplied file name, as other filenames can be used depending on
+     * the 'menu-specials' that can be promoted from time to time.
+     *
      * If the load method catches a FileNotFoundException, PizzaFormatException,
-     * or a TooManyToppingsException the application should exit with the vales 1, 2,
-     * and 4 respectively.
+     * TooManyToppingsException, IndexOutOfBoundsException or
+     * a IOException the application should exit with the values 1, 2, 4, 5 and 6 respectively.
+     *
+     * Given the importance of the menu, within the confines of the Pizza company,
+     * if the menu loading mechanism experiences a failure in loading or parsing,
+     * then the application is to exit, by providing an appropriate exit integer code
+     * stored in an inner class within MenuLoader, called Reason.
+     * This is not mandatory (and will not be tested) but provides a developer friendly mechanism for debugging.
+     * Here is an example for the constant variable names:
+     *          COULD_NOT_OPEN_FILE = 1
+     *          FILE_FORMAT_ERROR = 2
+     *          TOO_MANY_TOPPINGS = 4
+     *          MISSING_NUMBER_OF_PIZZAS = 5
+     *          CANNOT_READ_LINE = 6
+     * These values will assist you with the expected exit codes as defined above.
      * @param filename name of file to be read
-     * @return
+     * @return a parsed Menu type containing the list of Pizzas found in the menu text file.
      */
     public static Menu load(String filename){
         BufferedReader reader = null;
@@ -66,10 +79,12 @@ public class MenuLoader {
             System.exit(1);
         } catch (PizzaFormatException e){
             System.exit(2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         } catch (TooManyToppingsException e3){
+            System.exit(3);
+        } catch (IndexOutOfBoundsException e) {
             System.exit(4);
+        } catch (IOException e) {
+            System.exit(5);
         }
         return null;
     }
@@ -78,8 +93,8 @@ public class MenuLoader {
      * Used by the load method to manage the parsing of the loaded data.
      * The PizzaMenu.txt file content consists of the following formatted text:
      * The first-string token is a string with no spaces and must be the string "PizzaMenu".
-     * On the same line separated by a space is a number (an integer value)
-     * representing the number of pizza menu items that are available within the given file.
+     * On the same line separated by a space is a number (an integer value) representing
+     * the number of pizza menu items that are available within the given file.
      * This number reflects the number of lines the file reader will read to obtain all the pizzas provided.
      * There should not be any extra whitespace after this number.
      *
@@ -111,9 +126,22 @@ public class MenuLoader {
      *
      *          Flaming Hot [chillies, jalapenos, carolina reapers, red onions]
      *          Meat Feast [bacon, pepperoni, sausage, beef, chicken]
+     * @param reader BufferedReader used to read file
+     * @return item that has loaded all the pizza's from the file
+     * @throws PizzaFormatException  if the given reader is `null` or empty,
+     * if the name on the first line is not "PizzaMenu", if the space is missing after the name,
+     * if the number of pizza's can not be parsed, if a blank line does not follow the first line,
+     * if a topping line contains an invalid topping name,
+     * if a blank line does not follow the vegan topping line,
+     * if a pizza line contains an invalid topping (such that, it was not mentioned in any topping line).
+     * @throws TooManyToppingsException  if a pizza line has too many toppings.
+     * @throws IndexOutOfBoundsException if the number of pizza lines given in
+     * the first line does not match the number of pizza lines present in the file.
+     * @throws IOException if an error occurs when trying to read a line.
      */
     public static Menu getMenu(BufferedReader reader)
-            throws PizzaFormatException, TooManyToppingsException, IOException {
+            throws PizzaFormatException, TooManyToppingsException,
+            IndexOutOfBoundsException, IOException {
         if(reader.equals(null)) {
             System.exit(1);
         }
@@ -152,8 +180,8 @@ public class MenuLoader {
 
         for (int i = 0 ; i < numOfPizza; i++) {
             content = reader.readLine();
+            linenum += 1;
             if(content != null) { // iterate though each pizza
-                linenum += 1;
                 try {
                     Menu.getInstance().registerMenuItem(makePizza(content, linenum));
                 }
@@ -180,6 +208,24 @@ public class MenuLoader {
         for (int i = 0; i < words.length; i++) {
             Topping.createTopping(words[i], true);
         }
+    }
+
+    private static String toSentencecase(String name) {
+        String[] words = name.split(" ");
+        String firstLetter = "";
+        String otherChar = "";
+        String result = "";
+        for(int i = 0; i < words.length -1; i++) {
+            //System.out.print(words[i] + "-");
+            firstLetter = words[i].substring(0,1).toUpperCase();
+            otherChar = words[i].substring(1);
+            result += firstLetter + otherChar + " ";
+            //System.out.print("[" + firstLetter + "-" + otherChar+ "] ");
+        }
+        firstLetter = words[words.length -1].substring(0,1).toUpperCase();
+        otherChar = words[words.length -1].substring(1);
+        result += firstLetter + otherChar;
+        return result;
     }
 
     private static MenuItem makePizza(String content, int linenum) throws PizzaFormatException, TooManyToppingsException {
@@ -211,9 +257,9 @@ public class MenuLoader {
         }
         MenuPizza pizza = new MenuPizza(Bases.BaseSize.MEDIUM,
                 Sauces.Sauce.TOMATO, Cheeses.Cheese.MOZZARELLA,toppings);
+        pizza.setName(toSentencecase(name));
         return pizza;
     }
 }
 // make word uppercase
 // trim
-//

@@ -13,41 +13,6 @@ import java.util.List;
 public class Menu {
 
     /**
-     * Farm Favourites contains [bacon, beef, ham, chicken, sweetcorn]
-     */
-    static final int FARM_FAVOURITES = 4;
-
-    /**
-     * Hawaiian contains [pineapple, ham]
-     */
-    static final int HAWAIILAN = 2;
-
-    /**
-     * Margarita contains nothing but good old cheese
-     */
-    static final int MARGARITA = 6;
-
-    /**
-     * Meat Feast contains [bacon, pepperoni, sausage, beef, chicken]
-     */
-    static final int MEAT_FEAST = 0;
-
-    /**
-     * Spicy Italian contains [pepperoni, jalapeno, peppers]
-     */
-    static final int SPICY_ITALIAN = 3;
-
-    /**
-     * Spicy Vegan contains [tomatoes, peppers, onions, sweetcorn, jalapeno]
-     */
-    static final int SPICY_VEGAN = 5;
-
-    /**
-     * Vegetarian contains [tomatoes, mushroom, peppers, onions, olives]
-     */
-    static final int VEGETARIAN = 1;
-
-    /**
      * List of items inside the menu
      */
     private List<MenuItem> Items;
@@ -95,7 +60,7 @@ public class Menu {
      */
     public MenuItem get(int index)
             throws IndexOutOfBoundsException {
-        MenuItem output = null;
+        MenuItem output = Items.get(index);
         return output;
     }
 
@@ -105,7 +70,7 @@ public class Menu {
      * @return the items on the menu.
      */
     public List<MenuItem> getItems() {
-        List<MenuItem> items = new ArrayList<>();
+        List<MenuItem> items = new ArrayList<>(Items);
         return items;
     }
 }
