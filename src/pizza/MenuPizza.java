@@ -22,12 +22,10 @@ public class MenuPizza extends Pizza {
      * @throws TooManyToppingsException if toppings.size() > 5
      * OR when attempting to add toppings to Pizza or any class extending Pizza
      */
-    public MenuPizza(BaseSize size,
-                     Sauces.Sauce sauce,
-                     Cheeses.Cheese cheese,
-                     List<Topping> toppings)
+    public MenuPizza(BaseSize size, Sauces.Sauce sauce,
+                     Cheeses.Cheese cheese, List<Topping> toppings)
             throws TooManyToppingsException {
-        super(size,sauce,cheese,toppings);
+        super(size, sauce, cheese, toppings);
     }
 
     /**
@@ -37,7 +35,8 @@ public class MenuPizza extends Pizza {
      * Where:
      * `Pizza` toString of the Pizza superclass
      * For example:
-     *     [MenuPizza] Hawaiian: is a 'MEDIUM' sized base with 'TOMATO' sauce and 'MOZZARELLA' cheese - Toppings: [PINEAPPLE, HAM] $9.00
+     *     [MenuPizza] Hawaiian: is a 'MEDIUM' sized base with 'TOMATO' sauce
+     *     and 'MOZZARELLA' cheese - Toppings: [PINEAPPLE, HAM] $9.00
      * @return string representation of this Menu Pizza
      */
     @Override

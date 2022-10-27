@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Pizza combines the required basic elements of a pizza, being the base, sauce and cheese, and 5 additional toppings.
+ * Pizza combines the required basic elements of a pizza,
+ * being the base, sauce and cheese, and 5 additional toppings.
  * This is the Pizza template to be extended for more rewarding pizza toppings
  */
 public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
@@ -50,7 +51,8 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      * Default constructor which creates a medium cheese pizza with tomato sauce.
      * A cheese pizza has a tomato sauce base, mozzarella cheese and no additional toppings.
      * This pizza should be called "Dr Java's Pizza" unless/until another name is set.
-     * @throws TooManyToppingsException when attempting to add toppings to Pizza or any class extending Pizza
+     * @throws TooManyToppingsException when attempting to add toppings to Pizza
+     * or any class extending Pizza
      */
     public Pizza() {
         this.cheese = Cheeses.Cheese.MOZZARELLA;
@@ -66,7 +68,8 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      * @param size The size of the pizza base as defined by Bases
      * @param sauce The sauce on the pizza as defined by Sauces
      * @param cheese The cheese on the pizza as defined by Cheeses
-     * @throws TooManyToppingsException when attempting to add toppings to Pizza or any class extending Pizza
+     * @throws TooManyToppingsException when attempting to add toppings to Pizza
+     * or any class extending Pizza
      */
     public Pizza(Bases.BaseSize size, Sauces.Sauce sauce, Cheeses.Cheese cheese) {
         this.size = size;
@@ -85,10 +88,8 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      * @throws TooManyToppingsException if toppings.size() > 5
      *  when attempting to add toppings to Pizza or any class extending Pizza
      */
-    public Pizza(Bases.BaseSize size,
-                 Sauces.Sauce sauce,
-                 Cheeses.Cheese cheese,
-                 List<Topping> toppings)
+    public Pizza(Bases.BaseSize size, Sauces.Sauce sauce,
+                 Cheeses.Cheese cheese, List<Topping> toppings)
             throws TooManyToppingsException {
         if (toppings.size() > 5) {
             throw new TooManyToppingsException("The number of topping is "
@@ -118,10 +119,12 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      */
     public double getTotalPrice() {
         Double total = 0.0;
-        if(this.toppings.isEmpty()) return this.size.getPrice();
-        else return this.size.getPrice() + this.toppings.size() * 2;
+        if (this.toppings.isEmpty()) {
+            return this.size.getPrice();
+        } else {
+            return this.size.getPrice() + this.toppings.size() * 2;
+        }
     }
-
 
     /**
      * Returns the name of this pizza.
@@ -187,13 +190,35 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
         return this.hashCode() == other.hashCode();
     }
 
+    /**
+     * Returns the human-readable string representation of this Pizza.
+     * The format of the string to return is:
+     * $Name: is a '`BaseSize`' sized base with '`Sauce`' sauce and '`Cheese`'
+     *      cheese`Toppings` $`Price`
+     * Where:
+     * `Name` is the name of the pizza
+     * `BaseSize` is the base size of the pizza
+     * `Sauce` is the Sauce on the pizza
+     * `Cheese` is the Cheese on the pizza
+     * `Toppings` is:
+     * The empty string if there are no toppings
+     * " - Toppings: `Tops`" if there are toppings.
+     * Where `Tops` is the string representation of the list of toppings
+     * `Price` is the price of the pizza formatted to two decimal places
+     * For example:
+     * Dr Java's Pizza: is a 'MEDIUM' sized base with 'BBQ' sauce and 'MOZZARELLA' cheese $5.00
+     * OR, on a pizza with toppings
+     * Dr Java's Pizza: is a 'MEDIUM' sized base with 'BBQ' sauce and 'MOZZARELLA' cheese
+     *  - Toppings: [BACON, PEPPERONI, HAM] $11.00
+     * @return string representation of this Pizza
+     */
     public String toString() {
         String output = new String();
         output += this.name + ": is a "
                 + this.size + " sized base with "
                 + this.sauce + " sauce and "
                 + this.cheese + " cheese ";
-        if(!this.toppings.isEmpty()) {
+        if (!this.toppings.isEmpty()) {
             output += "- Toppings: " + this.toppings;
         }
         output += " $" + this.getTotalPrice();

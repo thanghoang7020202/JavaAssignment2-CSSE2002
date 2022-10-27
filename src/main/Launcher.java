@@ -10,6 +10,10 @@ import menu.CustomerOrder;
  * with a GUI to support the running of a world leading pizza shop.
  */
 public class Launcher {
+
+    /**
+     * Empty constructor for Launcher class
+     */
     public Launcher() {
     }
 

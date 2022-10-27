@@ -10,11 +10,12 @@ public interface MenuItem {
      * @return the price of the menu item
      */
     public double getTotalPrice();
+
     /**
      * Registers this item with the Menu singleton class.
      * This method should be called in the constructor of each implementing class.
      */
-    public default void registerMenuItem(){
+    public default void registerMenuItem() {
 
     }
 

@@ -20,7 +20,8 @@ public class CustomPizza extends Pizza implements MenuItem {
      * Default constructor which creates a medium cheese pizza.
      * A medium cheese pizza has a tomato sauce base, mozzarella cheese and no additional toppings.
      * This pizza should be called "Custom Pizza" until another name is set.
-     * @throws TooManyToppingsException when attempting to add toppings to Pizza or any class extending Pizza
+     * @throws TooManyToppingsException when attempting to add toppings to Pizza or
+     * any class extending Pizza
      */
     public CustomPizza() {
         super();
@@ -33,17 +34,18 @@ public class CustomPizza extends Pizza implements MenuItem {
      * @param size The size of the pizza base as defined by Bases
      * @param sauce The sauce on the pizza as defined by Sauces
      * @param cheese The cheese on the pizza as defined by Cheeses
-     * @throws TooManyToppingsException
+     * @throws IllegalArgumentException if size, sauce or cheese is null.
      */
     public CustomPizza(Bases.BaseSize size,
                        Sauces.Sauce sauce,
-                       Cheeses.Cheese cheese) {
-        super(size,sauce,cheese);
+                       Cheeses.Cheese cheese) throws IllegalArgumentException {
+        super(size, sauce, cheese);
         super.setName("Custom Pizza");
     }
 
     /**
-     * The add method allows toppings to be added to the pizza, limited to the maximum permissible amount of 5.
+     * The add method allows toppings to be added to the pizza,
+     * limited to the maximum permissible amount of 5.
      * This method will only add toppings to the pizza if ALL given toppings can be added.
      * If an exception is thrown then the list of toppings should remain unchanged.
      * @param toppings list of toppings to be added to the pizza
@@ -54,7 +56,7 @@ public class CustomPizza extends Pizza implements MenuItem {
     public void add(List<Topping> toppings)
             throws TooManyToppingsException {
         if (super.accessToppings().size() + toppings.size() > 5) {
-           throw new TooManyToppingsException("The number of topping is "
+            throw new TooManyToppingsException("The number of topping is "
                    + toppings.size() + " > 5");
         }
         super.accessToppings().addAll(toppings);

@@ -51,11 +51,29 @@ public class Order {
      */
     private List<Pizza> pizzas;
 
-    private int Discounttype;
+    /**
+     * Type of Discount
+     * 0 - No discount
+     * 1 - 10% discount
+     * 2 - 25% discount
+     */
+    private int discountType;
 
+    /**
+     * Creates an Order. The defaults for an order are given below:
+     * Name: "Not Given"
+     * Order Number: UUID.randomUUID();
+     * Date: LocalDate.now();
+     * Time: LocalTime.now();
+     * Orders: No default items
+     */
     public Order() {
         pizzas = new ArrayList<>();
-        Discounttype = 0;
+        discountType = 0;
+        this.name = "Not Given";
+        this.uuid = UUID.randomUUID();
+        this.date = LocalDate.now();
+        this.time = LocalTime.now();
     }
 
     /**
@@ -68,9 +86,11 @@ public class Order {
 
     /**
      * Mutator method to modify the orders UUID
-     * A UUID (universally unique identifier) is a 128-bit label used for information purposes in computer systems.
+     * A UUID (universally unique identifier) is a 128-bit label
+     * used for information purposes in computer systems.
      * The Java default library provides a UUID class, which enables a random UUID to be generated.
-     * It allows a unique random number for each given order. Please review the Java API for further information.
+     * It allows a unique random number for each given order. 
+     * Please review the Java API for further information.
      * @param uuid UUID
      */
     public void setUUID(UUID uuid) {
@@ -79,7 +99,8 @@ public class Order {
 
     /**
      * Mutator method to modify the order's creation date
-     * LocalDate is an immutable date-time object that represents a date, often viewed as year-month-day.
+     * LocalDate is an immutable date-time object that represents a date,
+     * often viewed as year-month-day.
      * See the Java API LocalDate for further information
      * @param date Local date
      */
@@ -89,7 +110,8 @@ public class Order {
 
     /**
      * Mutator method to modify the order's creation time
-     * LocalTime is an immutable date-time object that represents a time, often viewed as hour-minute-second.
+     * LocalTime is an immutable date-time object that represents a time,
+     * often viewed as hour-minute-second.
      * LocalTime for further information
      * @param time LocalTime
      */
@@ -103,35 +125,44 @@ public class Order {
      */
     public void add(Pizza pizza) {
         this.pizzas.add(pizza);
-        if(this.pizzas.size() > 6) Discounttype = 2;
-        else if(this.pizzas.size() > 3) Discounttype = 1;
+        if (this.pizzas.size() >= 6) {
+            discountType = 2;
+        } else if (this.pizzas.size() >= 3) {
+            discountType = 1;
+        }
     }
 
+    /**
+     * Object.toString() providing a complete synopsis of the order class
+     * including the current assigned date and time; formatted as shown.
+     * The time is formatted to provide only the hour and minute.
+     * @return String representing the instantiated class
+     */
     public String toString() {
         String pattern = "HH:mm:ss";
-        int TotalPrice = 0;
+        int totalPrice = 0;
         String output;
 
-        output = "Customer Order [ \n" +
-                " Date: " + this.date
+        output = "Customer Order [ \n"
+                + " Date: " + this.date
                 + "\n Time: " + this.time.format(DateTimeFormatter.ofPattern("HH:mm"))
                 + "\n Customer: " + this.name
                 + "\n Order number: " + this.uuid
                 + "\n Order:";
         //add more later;
-        for(int i = 0 ; i < pizzas.size(); i++) {
-            TotalPrice += pizzas.get(i).getTotalPrice();
-            output += "\n" + (i+1) + " - " + pizzas.get(i).toString();
+        for (int i = 0; i < pizzas.size(); i++) {
+            totalPrice += pizzas.get(i).getTotalPrice();
+            output += "\n" + (i + 1) + " - " + pizzas.get(i).toString();
         }
 
-        if(Discounttype != 0) {
+        if (discountType != 0) {
             output += "\n\n Multi item discount applied of "
-                    + TotalPrice + " applied, new Total: $";
-            output += (Discounttype == 1)?
-                    DISCOUNT_10.applyDiscount(TotalPrice): DISCOUNT_25.applyDiscount(TotalPrice);
+                    + totalPrice + " applied, new Total: $";
+            output += (discountType == 1)
+                    ? DISCOUNT_10.applyDiscount(totalPrice) : DISCOUNT_25.applyDiscount(totalPrice);
         } else {
             // this one is unsure!!!!!!
-            output += "\n\n Total: &" + TotalPrice;
+            output += "\n\n Total: &" + totalPrice;
         }
         return output;
     }

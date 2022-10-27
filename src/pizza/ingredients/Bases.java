@@ -38,9 +38,15 @@ public interface Bases {
          */
         public double getPrice() {
             switch (this) {
-                case LARGE -> { return 7;}
-                case MEDIUM -> { return 5;}
-                default -> { return 3;}
+                case LARGE -> {
+                    return 7;
+                }
+                case MEDIUM -> {
+                    return 5;
+                }
+                default -> {
+                    return 3;
+                }
             }
         }
     }

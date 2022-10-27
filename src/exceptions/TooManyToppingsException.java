@@ -29,7 +29,7 @@ public class TooManyToppingsException extends Exception {
     /**
      * Constructs a TooManyToppingsException that stores
      * the underlying cause of the exception.
-     * @param cause
+     * @param cause throwable that caused this exception
      */
     public TooManyToppingsException(Throwable cause) {
         super();
@@ -40,8 +40,8 @@ public class TooManyToppingsException extends Exception {
      * Constructs a TooManyToppingsException that contains
      * a helpful detail message explaining why the exception occurred
      * and the underlying cause of the exception.
-     * @param message
-     * @param cause
+     * @param message detail message
+     * @param cause throwable that caused this exception
      */
     public TooManyToppingsException(String message,
                                     Throwable cause) {

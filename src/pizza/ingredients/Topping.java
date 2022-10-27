@@ -7,8 +7,8 @@ import java.util.*;
  * Topping's are created using the createTopping(String, boolean) method
  * which in turn calls a private constructor. A Topping's name should be made uppercase such that:
  * createTopping("baCOn",false) would save the topping with a name of "BACON".
- *
- * The Topping class is meant to be a dynamic enum such that given a name the correct Topping is returned
+ * The Topping class is meant to be a dynamic enum such that given a name
+ * the correct Topping is returned
  * by the valueOf(String) method. Similar to createTopping(String, boolean)
  * this method will allow any case of string to match.
  * That is, an input of "bacon", "BaCON", "BACON" would all return the topping with name "BACON".
@@ -53,9 +53,20 @@ public class Topping {
      * This new topping is not returned but rather should be accessed by valueOf(String)
      * @param name name of the topping
      * @param isVegan if the topping is vegan or not
+     * @throws IllegalArgumentException if name == `null` or topping with that name
+     * has already been created or name.isBlank() is true
      */
-    public static void createTopping(String name,
-                                     boolean isVegan) {
+    public static void createTopping(String name, boolean isVegan)
+            throws IllegalArgumentException {
+        if (name.equals(null)
+                || name.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+        for (Topping topping: Topping.values()) {
+            if (toppings.equals(name.toUpperCase())) {
+                throw new IllegalArgumentException();
+            }
+        }
         Topping topping = new Topping(name.toUpperCase(), isVegan);
         toppings.add(topping);
     }
@@ -66,15 +77,20 @@ public class Topping {
      * (Extraneous whitespace characters are not permitted.)
      * @param name the name of the topping to be returned.
      * @return the topping with the specified name
+     * @throws IllegalArgumentException if this class has no topping with the specified name
+     * @throws NullPointerException if the argument is null
      */
-    public static Topping valueOf(String name) {
-        if(name == null) throw new NullPointerException();
+    public static Topping valueOf(String name)
+            throws IllegalArgumentException, NullPointerException {
+        if (name == null) {
+            throw new NullPointerException();
+        }
         for (Topping i : toppings) {
-            if(i.name.equals(name.toUpperCase())){
+            if (i.name.equals(name.toUpperCase())) {
                 return i;
             }
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     /**
@@ -85,10 +101,17 @@ public class Topping {
      */
     public static Topping[] values() {
         Topping[] output = new Topping[toppings.size()];
-        for(int i = 0; i < toppings.size(); i ++) {
+        for (int i = 0; i < toppings.size(); i++) {
             output[i] = toppings.get(i);
         }
         return output;
+    }
+
+    /**
+     * Resets Topping such that values() returns an empty Topping[].
+     */
+    public static void resetToppings() {
+        Topping.toppings = new ArrayList<>();
     }
 
     /**
@@ -106,7 +129,7 @@ public class Topping {
      * because there were fierce arguments about what constitutes a spicy topping.
      * Dr Java considered sweetcorn to be spicy, but his team disagreed.
      * The debate was so fierce that Dr Java was forced to concede and abandon the isSpicy property.
-     * @return
+     * @return boolean for vegan friendly item
      */
     public boolean isVegan() {
         return this.isVegan;

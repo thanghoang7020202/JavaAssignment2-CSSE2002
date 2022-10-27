@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
  * should this feature be required.
  */
 public class MenuLoader {
+
     /**
      * Use full path, change back since submit it
      */
@@ -44,7 +45,8 @@ public class MenuLoader {
 
     /**
      * Creates a BufferedReader, utilizing a FileReader to be parsed by the getMenu method.
-     * The file to be loaded is stored within a package called assets under the filename PizzaMenu.txt.
+     * The file to be loaded is stored within a package called assets
+     * under the filename PizzaMenu.txt.
      * This is the supplied file name, as other filenames can be used depending on
      * the 'menu-specials' that can be promoted from time to time.
      *
@@ -56,7 +58,8 @@ public class MenuLoader {
      * if the menu loading mechanism experiences a failure in loading or parsing,
      * then the application is to exit, by providing an appropriate exit integer code
      * stored in an inner class within MenuLoader, called Reason.
-     * This is not mandatory (and will not be tested) but provides a developer friendly mechanism for debugging.
+     * This is not mandatory (and will not be tested)
+     * but provides a developer friendly mechanism for debugging.
      * Here is an example for the constant variable names:
      *          COULD_NOT_OPEN_FILE = 1
      *          FILE_FORMAT_ERROR = 2
@@ -67,24 +70,23 @@ public class MenuLoader {
      * @param filename name of file to be read
      * @return a parsed Menu type containing the list of Pizzas found in the menu text file.
      */
-    public static Menu load(String filename){
+    public static Menu load(String filename) {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(PATH + filename));
             Menu menu = getMenu(reader);
             reader.close();
             return menu;
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.exit(1);
-        } catch (PizzaFormatException e){
+        } catch (PizzaFormatException e) {
             System.exit(2);
-        } catch (TooManyToppingsException e3){
-            System.exit(3);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (TooManyToppingsException e3) {
             System.exit(4);
-        } catch (IOException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.exit(5);
+        } catch (IOException e) {
+            System.exit(6);
         }
         return null;
     }
@@ -95,37 +97,44 @@ public class MenuLoader {
      * The first-string token is a string with no spaces and must be the string "PizzaMenu".
      * On the same line separated by a space is a number (an integer value) representing
      * the number of pizza menu items that are available within the given file.
-     * This number reflects the number of lines the file reader will read to obtain all the pizzas provided.
+     * This number reflects the number of lines the file reader
+     * will read to obtain all the pizzas provided.
      * There should not be any extra whitespace after this number.
      *
      * Then, following the first line, is an empty line.
      * After this empty line will follow a comma separated list of non-vegan toppings.
-     * On the line following non-vegan toppings will be another comma separated list of vegan toppings.
+     * On the line following non-vegan toppings will be another comma
+     * separated list of vegan toppings.
      * If any topping can not be parsed then an exception should be thrown.
      *
      * Following the list of vegan toppings will be an empty line.
      * Each subsequent pizza menu item is provided on its own line.
-     * A line is a string of text that is separated by the carriage return or separated by an empty line.
+     * A line is a string of text that is separated by the carriage return
+     * or separated by an empty line.
      * For each pizza menu item, a line of text is formatted in the following style:
      * 'Pizza Name' which can include spaces and is written with a Title Format.
-     * A title format means that each new word starts with a capital letter and is followed by lowercase letters.
+     * A title format means that each new word starts with a capital letter
+     * and is followed by lowercase letters.
      * This will not be tested for programmatically, but is expected for style points when marked.
      *
      * For example: Title Format String Of Words.
      * The menu item pizza name is followed by a space and an opening square bracket `[`.
-     * This is then followed by a list of pizza toppings separated by commas, and finally a closing square bracket `]`.
+     * This is then followed by a list of pizza toppings separated by commas,
+     * and finally a closing square bracket `]`.
      * The next menu pizza item is listed on the next line, and so on.
      * The list of toppings is provided in lower case.
      * However, care must be taken to read the text-file with any character-case type provided.
-     * By default all Menu Pizza's will be set as 'MEDIUM' with a 'TOMATO' base and 'MOZZARELLA' cheese.
-     * The following is an example of a menu text file called PizzaMenu.txt that contains two menu items:
-     *          PizzaMenu 2
+     * By default, all Menu Pizza's will be set as 'MEDIUM'
+     * with a 'TOMATO' base and 'MOZZARELLA' cheese.
+     * The following is an example of a menu text file called PizzaMenu.txt
+     * that contains two menu items:
+     *   PizzaMenu 2
      *
-     *          bacon, chicken, beef, ham, pepperoni, sausage, prawn
-     *          red onions, carolina reapers, peppers, olives, onions, chillies, jalapenos, pineapple
+     *   bacon, chicken, beef, ham, pepperoni, sausage, prawn
+     *   red onions, carolina reapers, peppers, olives, onions, chillies, jalapenos, pineapple
      *
-     *          Flaming Hot [chillies, jalapenos, carolina reapers, red onions]
-     *          Meat Feast [bacon, pepperoni, sausage, beef, chicken]
+     *   Flaming Hot [chillies, jalapenos, carolina reapers, red onions]
+     *   Meat Feast [bacon, pepperoni, sausage, beef, chicken]
      * @param reader BufferedReader used to read file
      * @return item that has loaded all the pizza's from the file
      * @throws PizzaFormatException  if the given reader is `null` or empty,
@@ -133,7 +142,8 @@ public class MenuLoader {
      * if the number of pizza's can not be parsed, if a blank line does not follow the first line,
      * if a topping line contains an invalid topping name,
      * if a blank line does not follow the vegan topping line,
-     * if a pizza line contains an invalid topping (such that, it was not mentioned in any topping line).
+     * if a pizza line contains an invalid topping
+     * (such that, it was not mentioned in any topping line).
      * @throws TooManyToppingsException  if a pizza line has too many toppings.
      * @throws IndexOutOfBoundsException if the number of pizza lines given in
      * the first line does not match the number of pizza lines present in the file.
@@ -142,7 +152,7 @@ public class MenuLoader {
     public static Menu getMenu(BufferedReader reader)
             throws PizzaFormatException, TooManyToppingsException,
             IndexOutOfBoundsException, IOException {
-        if(reader.equals(null)) {
+        if (reader.equals(null)) {
             System.exit(1);
         }
         int linenum = 0;
@@ -153,19 +163,19 @@ public class MenuLoader {
         linenum += 1;
         Matcher matcher = pattern.matcher(content);
         Boolean found = matcher.find();
-        if(content == null || !found) {
-            throw new PizzaFormatException("file have no line! OR" +
-                    "the pattern not match!", linenum);
+        if (content == null || !found) {
+            throw new PizzaFormatException("file have no line! OR"
+                    + "the pattern not match!", linenum);
         }
         // Take second parameter of content split by blank space (the number of Pizza)
-        int numOfPizza = Integer.parseInt(Arrays.stream(content.split(" ")).toArray()[1].toString());
+        final int numOfPizza = Integer.parseInt(Arrays.stream(
+                content.split(" ")).toArray()[1].toString());
 
         content = reader.readLine();
         linenum += 1;
-        if(!content.equals("")) {
+        if (!content.equals("")) {
             throw new PizzaFormatException("second line is not empty reader (1)", linenum);
         }
-
         content = reader.readLine();
         linenum += 1;
         addNonVegan(content);
@@ -174,18 +184,17 @@ public class MenuLoader {
         addVegan(content);
 
         content = reader.readLine();
-        if(!content.equals("")) {
+        if (!content.equals("")) {
             throw new PizzaFormatException("second line is not empty reader (2)", linenum);
         }
 
-        for (int i = 0 ; i < numOfPizza; i++) {
+        for (int i = 0; i < numOfPizza; i++) {
             content = reader.readLine();
             linenum += 1;
-            if(content != null) { // iterate though each pizza
+            if (content != null) { // iterate though each pizza
                 try {
                     Menu.getInstance().registerMenuItem(makePizza(content, linenum));
-                }
-                catch (PizzaFormatException | TooManyToppingsException e) {
+                } catch (PizzaFormatException | TooManyToppingsException e) {
                     throw new PizzaFormatException("The pizza format is incorrect", linenum);
                 }
             } else {
@@ -202,8 +211,13 @@ public class MenuLoader {
             Topping.createTopping(words[i], false);
         }
     }
+
+    /**
+     * Helping method to add Vegan topping into Topping list
+     * @param content string contain all topping separated with white space
+     */
     private static void addVegan(String content) {
-        String[] words= content.split(",");
+        String[] words = content.split(",");
         words = Arrays.stream(words).map(x -> x.trim()).toArray(String[]::new);
         for (int i = 0; i < words.length; i++) {
             Topping.createTopping(words[i], true);
@@ -215,27 +229,28 @@ public class MenuLoader {
         String firstLetter = "";
         String otherChar = "";
         String result = "";
-        for(int i = 0; i < words.length -1; i++) {
+        for (int i = 0; i < words.length - 1; i++) {
             //System.out.print(words[i] + "-");
-            firstLetter = words[i].substring(0,1).toUpperCase();
+            firstLetter = words[i].substring(0, 1).toUpperCase();
             otherChar = words[i].substring(1);
             result += firstLetter + otherChar + " ";
             //System.out.print("[" + firstLetter + "-" + otherChar+ "] ");
         }
-        firstLetter = words[words.length -1].substring(0,1).toUpperCase();
-        otherChar = words[words.length -1].substring(1);
+        firstLetter = words[words.length - 1].substring(0, 1).toUpperCase();
+        otherChar = words[words.length - 1].substring(1);
         result += firstLetter + otherChar;
         return result;
     }
 
-    private static MenuItem makePizza(String content, int linenum) throws PizzaFormatException, TooManyToppingsException {
+    private static MenuItem makePizza(String content, int linenum)
+            throws PizzaFormatException, TooManyToppingsException {
         int pos = content.indexOf("[");
-        if(pos == -1) {
-            throw new PizzaFormatException("missing [",linenum);
+        if (pos == -1) {
+            throw new PizzaFormatException("missing [", linenum);
         }
         String[] words = new String[2];
-        words[0] = content.substring(0,pos -1);
-        words[1] = content.substring(pos+1,content.length() -1);
+        words[0] = content.substring(0, pos - 1);
+        words[1] = content.substring(pos + 1, content.length() - 1);
         //Arrays.stream(words).peek(System.out::print);
 
         if (words.length < 2 || words.length > 2) {
@@ -243,20 +258,20 @@ public class MenuLoader {
             //System.out.println("word < 2");
         }
         String name = words[0];
-        List<String> ingredients= Arrays.asList(words[1].split(", "));
-        if(ingredients.size() > Pizza.MAX_TOPPINGS) {
+        List<String> ingredients = Arrays.asList(words[1].split(", "));
+        if (ingredients.size() > Pizza.MAX_TOPPINGS) {
             throw new TooManyToppingsException("To many topping is add in a file");
         }
         List<Topping> toppings = new ArrayList<>();
-        for(String str : ingredients) {
-            if(Topping.valueOf(str) instanceof Topping) {
+        for (String str : ingredients) {
+            if (Topping.valueOf(str) instanceof Topping) {
                 toppings.add(Topping.valueOf(str));
             } else {
                 throw new PizzaFormatException("incorrect topping input", linenum);
             }
         }
         MenuPizza pizza = new MenuPizza(Bases.BaseSize.MEDIUM,
-                Sauces.Sauce.TOMATO, Cheeses.Cheese.MOZZARELLA,toppings);
+                Sauces.Sauce.TOMATO, Cheeses.Cheese.MOZZARELLA, toppings);
         pizza.setName(toSentencecase(name));
         return pizza;
     }

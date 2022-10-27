@@ -15,11 +15,18 @@ public class Menu {
     /**
      * List of items inside the menu
      */
-    private List<MenuItem> Items;
+    private List<MenuItem> items;
 
+    /**
+     * Menu object in Menu singleton class
+     */
     private static Menu menu;
+
+    /**
+     * Private menu constructor
+     */
     private Menu() {
-        Items = new ArrayList<>();
+        items = new ArrayList<>();
     }
 
     /**
@@ -27,7 +34,9 @@ public class Menu {
      * @return singleton instance
      */
     public static Menu getInstance() {
-        if(menu == null) menu = new Menu();
+        if (menu == null) {
+            menu = new Menu();
+        }
         return menu;
     }
 
@@ -41,14 +50,14 @@ public class Menu {
      */
     public void registerMenuItem(MenuItem item) {
         boolean flag = false;
-        for (MenuItem i : Items) {
-            if( i.equals(item)) {
+        for (MenuItem i : items) {
+            if (i.equals(item)) {
                 flag = true;
                 break;
             }
         }
         if (!flag) {
-            this.Items.add(item);
+            this.items.add(item);
         }
     }
 
@@ -60,7 +69,7 @@ public class Menu {
      */
     public MenuItem get(int index)
             throws IndexOutOfBoundsException {
-        MenuItem output = Items.get(index);
+        MenuItem output = items.get(index);
         return output;
     }
 
@@ -70,7 +79,7 @@ public class Menu {
      * @return the items on the menu.
      */
     public List<MenuItem> getItems() {
-        List<MenuItem> items = new ArrayList<>(Items);
+        List<MenuItem> items = new ArrayList<>(this.items);
         return items;
     }
 }
