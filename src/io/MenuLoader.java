@@ -263,9 +263,9 @@ public class MenuLoader {
             throw new TooManyToppingsException("To many topping is add in a file");
         }
         List<Topping> toppings = new ArrayList<>();
-        for (String str : ingredients) {
-            if (Topping.valueOf(str) instanceof Topping) {
-                toppings.add(Topping.valueOf(str));
+        for (String strTopping : ingredients) {
+            if (Topping.valueOf(strTopping) instanceof Topping) {
+                toppings.add(Topping.valueOf(strTopping));
             } else {
                 throw new PizzaFormatException("incorrect topping input", linenum);
             }

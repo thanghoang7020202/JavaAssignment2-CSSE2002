@@ -58,15 +58,15 @@ public class Topping {
      */
     public static void createTopping(String name, boolean isVegan)
             throws IllegalArgumentException {
-        if (name.equals(null)
-                || name.isBlank()) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException();
         }
-        for (Topping topping: Topping.values()) {
-            if (toppings.equals(name.toUpperCase())) {
+        for (int i = 0; i < Topping.values().length; i++) {
+            if (Topping.values()[i].name.equals(name.toUpperCase())) {
                 throw new IllegalArgumentException();
             }
         }
+
         Topping topping = new Topping(name.toUpperCase(), isVegan);
         toppings.add(topping);
     }
@@ -104,6 +104,11 @@ public class Topping {
         for (int i = 0; i < toppings.size(); i++) {
             output[i] = toppings.get(i);
         }
+
+        /*for (int i = 0; i < output.length ; i++) {
+            System.out.print(output[i].toString());
+        }*/
+        System.out.println("");
         return output;
     }
 
