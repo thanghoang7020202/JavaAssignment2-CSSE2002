@@ -28,7 +28,7 @@ public class PizzaFormatException extends Exception {
     public PizzaFormatException(String message,
                                 int lineNum,
                                 Throwable cause) {
-        super(message + " at " + lineNum + ", ");
+        super(message + " at " + lineNum);
         //System.out.println(cause);
     }
 }

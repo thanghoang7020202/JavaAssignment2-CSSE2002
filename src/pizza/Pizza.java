@@ -71,7 +71,11 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      * @throws TooManyToppingsException when attempting to add toppings to Pizza
      * or any class extending Pizza
      */
-    public Pizza(Bases.BaseSize size, Sauces.Sauce sauce, Cheeses.Cheese cheese) {
+    public Pizza(Bases.BaseSize size, Sauces.Sauce sauce, Cheeses.Cheese cheese)
+            throws IllegalArgumentException {
+        if (size == null || sauce == null || cheese == null) {
+            throw new IllegalArgumentException();
+        }
         this.size = size;
         this.sauce = sauce;
         this.cheese = cheese;
@@ -90,7 +94,10 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      */
     public Pizza(Bases.BaseSize size, Sauces.Sauce sauce,
                  Cheeses.Cheese cheese, List<Topping> toppings)
-            throws TooManyToppingsException {
+            throws TooManyToppingsException, IllegalArgumentException {
+        if (size == null || sauce == null || cheese == null || toppings == null) {
+            throw new IllegalArgumentException();
+        }
         if (toppings.size() > 5) {
             throw new TooManyToppingsException("The number of topping is "
                     + toppings.size() + " > 5");
@@ -138,7 +145,10 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      * Set the name of the pizza.
      * @param name String providing a replacement name of the pizza
      */
-    public void setName(String name) {
+    public void setName(String name) throws IllegalArgumentException {
+        if (name == null) {
+            throw new IllegalArgumentException();
+        }
         this.name = name;
     }
 
@@ -213,15 +223,15 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      * @return string representation of this Pizza
      */
     public String toString() {
-        String output = new String();
-        output += this.name + ": is a "
-                + this.size + " sized base with "
-                + this.sauce + " sauce and "
-                + this.cheese + " cheese ";
+        String output = "";
+        output += this.name + ": is a '"
+                + this.size + "' sized base with '"
+                + this.sauce + "' sauce and '"
+                + this.cheese + "' cheese ";
         if (!this.toppings.isEmpty()) {
             output += "- Toppings: " + this.toppings;
         }
-        output += " $" + this.getTotalPrice();
+        output += "$" + this.getTotalPrice();
         return output;
     }
 

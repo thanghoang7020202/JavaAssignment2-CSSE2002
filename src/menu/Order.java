@@ -2,6 +2,7 @@ package menu;
 
 import pizza.Pizza;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +16,11 @@ import java.util.UUID;
  * To make it easy to identify order's they are also given a UUID.
  */
 public class Order {
+
+    /**
+     * formatting the double.toString() into number with 2 decimal place
+     */
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      * A constant lambda functional interface to apply a 25% discount
@@ -140,15 +146,14 @@ public class Order {
      */
     public String toString() {
         String pattern = "HH:mm:ss";
-        int totalPrice = 0;
+        Double totalPrice = 0.00;
         String output;
 
-        output = "Customer Order [ \n"
-                + " Date: " + this.date
-                + "\n Time: " + this.time.format(DateTimeFormatter.ofPattern("HH:mm"))
-                + "\n Customer: " + this.name
-                + "\n Order number: " + this.uuid
-                + "\n Order:";
+        output = "Date: " + this.date
+                + "\nTime: " + this.time.format(DateTimeFormatter.ofPattern("HH:mm"))
+                + "\nCustomer: " + this.name
+                + "\nOrder number: " + this.uuid
+                + "\nOrder:";
         //add more later;
         for (int i = 0; i < pizzas.size(); i++) {
             totalPrice += pizzas.get(i).getTotalPrice();
@@ -156,13 +161,13 @@ public class Order {
         }
 
         if (discountType != 0) {
-            output += "\n\n Multi item discount applied of "
+            output += "\n\n Multi item discount applied of &"
                     + totalPrice + " applied, new Total: $";
             output += (discountType == 1)
                     ? DISCOUNT_10.applyDiscount(totalPrice) : DISCOUNT_25.applyDiscount(totalPrice);
         } else {
             // this one is unsure!!!!!!
-            output += "\n\n Total: &" + totalPrice;
+            output += "\n\n Total: $" + totalPrice;
         }
         return output;
     }

@@ -33,9 +33,10 @@ import java.util.regex.Pattern;
 public class MenuLoader {
 
     /**
-     * Use full path, change back since submit it
+     * Using full path, change back since submission has been made
+     * "D:\\UQ\\CSSE2002 - Programming in the Large\\ASSIGNMENT2\\src\\assets\\"
      */
-    public static final String PATH = "D:\\UQ\\CSSE2002 - Programming in the Large\\ASSIGNMENT2\\src\\assets\\";
+    public static final String PATH = "./src/assets/";
 
     /**
      * Inherited default constructor, not used in this class
@@ -152,7 +153,7 @@ public class MenuLoader {
     public static Menu getMenu(BufferedReader reader)
             throws PizzaFormatException, TooManyToppingsException,
             IndexOutOfBoundsException, IOException {
-        if (reader.equals(null)) {
+        if (reader == null) {
             System.exit(1);
         }
         int linenum = 0;
@@ -198,7 +199,8 @@ public class MenuLoader {
                     throw new PizzaFormatException("The pizza format is incorrect", linenum);
                 }
             } else {
-                throw new PizzaFormatException("missing pizza!", linenum);
+                throw new PizzaFormatException("the # pizza is less than which has been declared"
+                        , linenum);
             }
         }
         return Menu.getInstance();

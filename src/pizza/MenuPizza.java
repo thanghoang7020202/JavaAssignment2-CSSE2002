@@ -24,7 +24,7 @@ public class MenuPizza extends Pizza {
      */
     public MenuPizza(BaseSize size, Sauces.Sauce sauce,
                      Cheeses.Cheese cheese, List<Topping> toppings)
-            throws TooManyToppingsException {
+            throws TooManyToppingsException, IllegalArgumentException {
         super(size, sauce, cheese, toppings);
     }
 

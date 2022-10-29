@@ -82,4 +82,11 @@ public class Menu {
         List<MenuItem> items = new ArrayList<>(this.items);
         return items;
     }
+
+    /**
+     * Removes all loaded items from the Menu such that getItems() will return a list of size 0.
+     */
+    public void clear() {
+        this.items = new ArrayList<>();
+    }
 }
