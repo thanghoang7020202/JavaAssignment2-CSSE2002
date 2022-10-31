@@ -33,8 +33,7 @@ import java.util.regex.Pattern;
 public class MenuLoader {
 
     /**
-     * Using full path, change back before the submission
-     * "./src/assets/" from
+     * Using full path, change back since submission has been made
      * "D:\\UQ\\CSSE2002 - Programming in the Large\\ASSIGNMENT2\\src\\assets\\"
      */
     public static final String PATH = "./src/assets/";
@@ -154,17 +153,17 @@ public class MenuLoader {
     public static Menu getMenu(BufferedReader reader)
             throws PizzaFormatException, TooManyToppingsException,
             IndexOutOfBoundsException, IOException {
-        if (reader == null) {
-            throw new PizzaFormatException("Reader can not be null", 0);
+        if (reader.equals(null)) {
+            System.exit(1);
         }
         int linenum = 0;
         String content = "";
         Pattern pattern = Pattern.compile("PizzaMenu [0-9]", Pattern.CASE_INSENSITIVE);
 
-        content = reader.readLine();
+        content = reader.readLine().toString();
         linenum += 1;
         Matcher matcher = pattern.matcher(content);
-        boolean found = matcher.find();
+        Boolean found = matcher.find();
         if (content == null || !found) {
             throw new PizzaFormatException("file have no line! OR"
                     + "the pattern not match!", linenum);
@@ -200,20 +199,12 @@ public class MenuLoader {
                     throw new PizzaFormatException("The pizza format is incorrect", linenum);
                 }
             } else {
-                throw new IndexOutOfBoundsException(linenum);
+                throw new PizzaFormatException("missing pizza!", linenum);
             }
-        }
-        content = reader.readLine();
-        if (content != null) {
-            throw new IndexOutOfBoundsException(linenum);
         }
         return Menu.getInstance();
     }
 
-    /**
-     * add non-vegan topping into the list
-     * @param content string content topping name separated with blank space
-     */
     private static void addNonVegan(String content) {
         String[] words = content.split(",");
         words = Arrays.stream(words).map(x -> x.trim()).toArray(String[]::new);
@@ -234,11 +225,6 @@ public class MenuLoader {
         }
     }
 
-    /**
-     * Convert random string value into Sentence case
-     * @param name Sting to be converted
-     * @return the converted name
-     */
     private static String toSentencecase(String name) {
         String[] words = name.split(" ");
         String firstLetter = "";
@@ -257,16 +243,6 @@ public class MenuLoader {
         return result;
     }
 
-    /**
-     * helping function which make a pizza
-     * @param content the string with format:
-     *               `pizza name` [ingredients]
-     * @param linenum the line number in the read file for debugging
-     * @return the pizza
-     * @throws TooManyToppingsException  if a pizza line has too many toppings.
-     * @throws IndexOutOfBoundsException if the number of pizza lines given in
-     * the first line does not match the number of pizza lines present in the file.
-     */
     private static MenuItem makePizza(String content, int linenum)
             throws PizzaFormatException, TooManyToppingsException {
         int pos = content.indexOf("[");
@@ -301,3 +277,5 @@ public class MenuLoader {
         return pizza;
     }
 }
+// make word uppercase
+// trim

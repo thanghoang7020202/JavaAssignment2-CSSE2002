@@ -161,16 +161,15 @@ public class Order {
         }
 
         if (discountType != 0) {
-            output += "\n\nMulti item discount applied of $"
-                    + df.format(totalPrice) + " applied, new Total: $";
+            output += "\n\n Multi item discount applied of &"
+                    + totalPrice + " applied, new Total: $";
             output += (discountType == 1)
-                    ? df.format(DISCOUNT_10.applyDiscount(totalPrice)) :
-                    df.format(DISCOUNT_25.applyDiscount(totalPrice));
+                    ? DISCOUNT_10.applyDiscount(totalPrice) : DISCOUNT_25.applyDiscount(totalPrice);
         } else {
             // this one is unsure!!!!!!
-            output += "\n\nTotal: $" + df.format(totalPrice);
+            output += "\n\n Total: $" + totalPrice;
         }
-        return output + "\n";
+        return output;
     }
 }
 

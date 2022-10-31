@@ -7,7 +7,6 @@ import pizza.ingredients.Sauces;
 import pizza.ingredients.Topping;
 import menu.MenuItem;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +16,6 @@ import java.util.List;
  * This is the Pizza template to be extended for more rewarding pizza toppings
  */
 public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
-
-    /**
-     * formatting the double.toString() into number with 2 decimal place
-     */
-    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      * The maximum number of toppings that can be placed on a pizza. (5)
@@ -91,7 +85,6 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
 
     /**
      * Creating a Pizza with a set base size, sauce, cheese and list of toppings.
-     * This pizza should be called "Dr Java's Pizza" unless/until another name is set.
      * @param size The size of the pizza base as defined by Bases
      * @param sauce The sauce on the pizza as defined by Sauces
      * @param cheese  The cheese on the pizza as defined by Cheeses
@@ -153,7 +146,7 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      * @param name String providing a replacement name of the pizza
      */
     public void setName(String name) throws IllegalArgumentException {
-        if (name == null || name.isBlank()) {
+        if (name == null) {
             throw new IllegalArgumentException();
         }
         this.name = name;
@@ -190,20 +183,16 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
      * @return hash code of this pizza.
      */
     public int hashCode() {
-        int output = this.cheese.hashCode()
+        return this.name.hashCode()
+                + this.cheese.hashCode()
                 + this.size.hashCode()
-                + this.sauce.hashCode();
-
-        for (Topping topping : toppings) {
-            output += topping.hashCode();
-        }
-        return output;
+                + this.sauce.hashCode()
+                + this.toppings.hashCode();
     }
 
     /**
      * Returns true if and only if this pizza is equal to the other given object.
-     * For two pizzas' to be equal, they must at least have the same base size, sauce,
-     * cheese and collection of toppings ( in any order ).
+     * For two pizzas' to be equal, they must have the same base size, sauce, cheese and toppings
      * @param other the reference object with which to compare
      * @return true if this pizza is the same as the other argument; false otherwise
      */
@@ -240,9 +229,9 @@ public abstract class Pizza implements Bases, Sauces, Cheeses, MenuItem {
                 + this.sauce + "' sauce and '"
                 + this.cheese + "' cheese ";
         if (!this.toppings.isEmpty()) {
-            output += "- Toppings: " + this.toppings + " ";
+            output += "- Toppings: " + this.toppings;
         }
-        output += "$" + df.format(this.getTotalPrice());
+        output += "$" + this.getTotalPrice();
         return output;
     }
 
