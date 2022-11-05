@@ -18,14 +18,23 @@ import javax.swing.*;
 public class CustomerOrder {
 
     /**
+     * order of a customer
+     */
+    private Order order;
+
+    /**
      * Default Constructor to create a pizza Since no name supplied,
      * this constructor sends GUI prompt to the customer for their name
      * through by calling requestName().
      * and passes on the name to the String signature constructor.
      */
     public CustomerOrder() {
-        Order order = new Order();
-        order.setName(this.requestName());
+        try {
+            this.order = createOrder();
+            this.order.setName(this.requestName());
+        } catch (TooManyToppingsException e) {
+            order = null;
+        }
     }
 
     /**
@@ -35,9 +44,12 @@ public class CustomerOrder {
      * @param customerName String donating the name of the customer
      */
     public CustomerOrder(String customerName) {
-        Order order = new Order();
-        order.setName(customerName);
-
+        try {
+            order = createOrder();
+            order.setName(customerName);
+        } catch (TooManyToppingsException e) {
+            order = null;
+        }
     }
 
     /**
